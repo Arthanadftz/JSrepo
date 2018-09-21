@@ -6,7 +6,7 @@ VoxEngine.addEventListener(AppEvents.CallAlerting, function(e) {
 });
 
 function handleCallConnected(e) {
-  e.call.say("Hello! Enter your number", Language.US_ENGLISH_FEMALE);
+  e.call.say("Hello! Enter two numbers one by one. After entering each number You will hear notification.", Language.US_ENGLISH_FEMALE);
   e.call.addEventListener(CallEvents.PlaybackFinished, function() {
     if (mass.length >= 2) {
   e.call.say("Now we are going to calculate sum of numbers you have pushed.", Language.US_ENGLISH_FEMALE);
@@ -19,15 +19,14 @@ function handleCallConnected(e) {
 }
 
 function handleToneRecieved(e) {
-  e.call.say(`You have entered a tone! ${e.tone}`, Language.US_ENGLISH_FEMALE);
+  e.call.say(`You have entered a tone: ${e.tone}!`, Language.US_ENGLISH_FEMALE);
   mass.push(e.tone);
 }
 
 function calcSum(e) {
-  sum = mass[1] + mass[2];
-    e.call.say(`Sum is equal to: ${sum}. Thank you for your call!`, Language.US_ENGLISH_FEMALE);
+  sum = Number(mass[0]) + Number(mass[1]);
+    e.call.say(`Sum is equal to: ${sum}. Thank you for your call! I hope we are going to work together!`, Language.US_ENGLISH_FEMALE);
     e.call.addEventListener(CallEvents.PlaybackFinished, function() {
       VoxEngine.terminate();
     });
 }
-
